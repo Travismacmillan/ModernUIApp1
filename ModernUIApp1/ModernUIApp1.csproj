@@ -67,6 +67,7 @@
     <Compile Include="Protocol.xaml.cs">
       <DependentUpon>Protocol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProtocolDropHandler.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

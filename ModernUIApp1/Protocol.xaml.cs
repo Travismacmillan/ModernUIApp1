@@ -21,6 +21,8 @@ namespace ModernUIApp1
     /// </summary>
     public partial class Protocol : UserControl
     {
+        public ProtocolDropHandler DropHandler { get; set; }
+
         private ObservableCollection<ControlList> treeControlList = new ObservableCollection<ControlList>();
         public ObservableCollection<ControlList> TreeControlList
         {
@@ -33,7 +35,7 @@ namespace ModernUIApp1
         }
         public Protocol()
         {
-            
+            this.DropHandler = new ProtocolDropHandler();
 
             ControlList child = new ControlList();
             child.ControlLabel = "child1";
