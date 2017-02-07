@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="ModernUIApp1.Protocol"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+                        xmlns:local="clr-namespace:ModernUIApp1"
+                      xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+                      Height="350"
+                      Width="525">
+    <UserControl.Resources>
+        <HierarchicalDataTemplate x:Key="RecursiveData" DataType="{x:Type local:ControlList}" ItemsSource="{Binding ChildControlList}">
+            <Border  >
+                <DockPanel>
+                    <!--<TextBlock Text="{Binding Path=ControlLabel}"/>-->
+                    <Grid Margin="5,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="ControlLabelEditTB" Grid.Row="0" Grid.Column="0" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                     Text="{Binding Path=ControlLabel}" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" >
+                        </TextBlock>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <TreeView x:Name="TreeList" ItemsSource="{Binding TreeControlList}" ItemTemplate="{StaticResource RecursiveData}" 
+                                      dd:DragDrop.UseDefaultDragAdorner="True" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True">
+            <!--local:AttachedProperties.SelectedItems="{Binding SelectedElements}"-->
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True"/>
+
+                    <!--<Setter Property="IsSelected" Value="{Binding Path=IsSelected, Mode=TwoWay}" />-->
+                    <!-- == == BEGIN HERE == == -->
+                    <Style.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="Grid.ColumnSpan" Value="2" />
+                        </Style>
+                    </Style.Resources>
+                    <!-- == == == END == == == -->
+
+                </Style>
+            </TreeView.ItemContainerStyle>
+            <TreeView.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}">#AED581</SolidColorBrush>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightGray"/>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
+</UserControl>
